@@ -1,0 +1,63 @@
+@SistemaBancario_HostAddress = http://localhost:5285
+
+### RF-09 — listar clientes
+GET {{SistemaBancario_HostAddress}}/api/clientes
+Accept: application/json
+
+### RF-01 — consultar cliente por ID
+GET {{SistemaBancario_HostAddress}}/api/clientes/1
+Accept: application/json
+
+### RF-05 / RF-06 — cadastrar cliente (sem contaCorrenteId abre uma conta nova)
+POST {{SistemaBancario_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "Ana Souza",
+  "idade": 28,
+  "email": "anasouza@gmail.com"
+}
+
+### RF-02 — ativar cliente
+POST {{SistemaBancario_HostAddress}}/api/clientes/1/ativar
+
+### RF-03 — desativar cliente
+POST {{SistemaBancario_HostAddress}}/api/clientes/1/desativar
+
+### RF-07 — remover cliente
+DELETE {{SistemaBancario_HostAddress}}/api/clientes/3
+
+### RF-08 — limpar a base de clientes
+# DELETE {{SistemaBancario_HostAddress}}/api/clientes
+
+### RF-14 — listar contas
+GET {{SistemaBancario_HostAddress}}/api/contas
+Accept: application/json
+
+### RF-10 — consultar conta por ID
+GET {{SistemaBancario_HostAddress}}/api/contas/1
+Accept: application/json
+
+### RF-11 — cadastrar conta
+POST {{SistemaBancario_HostAddress}}/api/contas
+Content-Type: application/json
+
+{
+  "saldoInicial": 500.00
+}
+
+### Ativar / desativar conta
+POST {{SistemaBancario_HostAddress}}/api/contas/1/desativar
+
+### RF-13 — remover conta (409 se pertencer a um cliente)
+DELETE {{SistemaBancario_HostAddress}}/api/contas/3
+
+### RF-15 — transferir
+POST {{SistemaBancario_HostAddress}}/api/transferencias
+Content-Type: application/json
+
+{
+  "contaOrigemId": 3,
+  "contaDestinoId": 1,
+  "valor": 100.00
+}
